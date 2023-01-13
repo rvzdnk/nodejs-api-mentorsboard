@@ -28,7 +28,7 @@ const getAllUserAdverts = async (req, res, next) => {
 const createAdvert = async (req, res, next) => {
     try {
         const { id: userId } = req.user;
-        const newAdvert = await createNewAdvert(userId, body);
+        const newAdvert = await createNewAdvert(userId, req.body);
         res.status(201).json({
             newAdvert: {
                 technology: newAdvert.technology,
@@ -56,7 +56,8 @@ const editAdvert =  async (req, res, next) => {
             },
         });
     } catch (error) {
-        next(error);
+        next(error)
+        console.log("hej");
     }
 };
 

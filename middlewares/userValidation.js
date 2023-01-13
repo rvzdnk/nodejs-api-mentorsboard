@@ -17,7 +17,7 @@ const registrationSchema = Joi.object({
     password: Joi.string()
     .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
     .required(),
-    subscription: Joi.string().valid("student", "mentor"),
+    role: Joi.string().valid("Student", "Mentor"),
 });
 
 const loginSchema = Joi.object({

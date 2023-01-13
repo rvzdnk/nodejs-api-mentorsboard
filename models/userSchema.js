@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 const bCrypt = require("bcrypt");
 
+const ROLE_LIST = [
+   "Student",
+   "Mentor"
+];
+
 const userSchema = new Schema(
     {
       name: {
@@ -20,8 +25,12 @@ const userSchema = new Schema(
       },
       role: {
         type: String,
-        enum: ["student", "mentor"],
-        default: "student",
+        enum: ROLE_LIST,
+        required: [true, "Role is required"],
+      },
+      token: {
+        type: String,
+        default: null,
       },
     },
     {
@@ -42,5 +51,8 @@ userSchema.methods.validatePassword = async function (password) {
   };
 
 const User = model("user", userSchema);
+
+const { Mentor, Student} = ROLE_LIST
+module.exports = { Mentor, Student};
 
 module.exports = User;

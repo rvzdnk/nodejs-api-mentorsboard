@@ -3,7 +3,7 @@ const Joi = require("joi");
 const schemaCreationOrEditing = Joi.object({
     technology: Joi.string().trim(),
     level: Joi.string().trim(),
-    price: Joi.number().trim(),
+    price: Joi.number(),
 });
 
 const validation = (schema, req, res, next) => {

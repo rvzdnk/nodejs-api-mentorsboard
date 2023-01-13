@@ -11,7 +11,7 @@ const SECRET = process.env.SECRET_KEY;
 
 const registerUser = async (req, res, next) => {
     try{
-        const { email} = req.body;
+        const { email } = req.body;
         const user = await findUserByEmail(email);
 
     if (user){

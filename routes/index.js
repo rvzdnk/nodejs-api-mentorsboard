@@ -3,10 +3,11 @@ const router = express.Router();
 
 const usersRouter = require("./user");
 const advertsRouter = require("./adverts");
-const { getAdverts } = require("../controllers/advertController");
 
-router.use("/", getAdverts);
-router.use("/adverts", advertsRouter);
+const verifyRoles = require("../middlewares/verifyRole");
+const { Mentor, Student } = require("../models/userSchema");
+
+router.use("/adverts", verifyRoles(Mentor), advertsRouter);
 router.use("/user", usersRouter);
 
 module.exports = router;
