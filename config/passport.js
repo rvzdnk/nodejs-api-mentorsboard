@@ -4,11 +4,11 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const { Strategy } = passportJWT;
 
 require("dotenv").config();
-const SECRET = process.env.SECRET_KEY;
+const SECRET_KEY = process.env.SECRET_KEY;
 const User = require("../models/userSchema");
 
 const params = {
-  secretOrKey: SECRET,
+  secretOrKey: SECRET_KEY,
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
 };
 
