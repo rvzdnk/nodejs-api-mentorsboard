@@ -9,7 +9,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 const params = {
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.SECRET_KEY,
+  secretOrKey: 'secret',
 };
 
 passport.use(
