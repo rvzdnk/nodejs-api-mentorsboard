@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authenticateUser = require("../middlewares/authenticateUser");
-const verifyRoles = require("../middlewares/verifyRole");
 const { validateCreationOrEditing } = require("../middlewares/advertValidation");
-const { Mentor, Student } = require("../models/userSchema");
 
 const {
     getAllUserAdverts,
@@ -11,6 +9,7 @@ const {
     editAdvert,
     deleteAdvert,
 } = require("../controllers/advertController");
+
 
 router.get("/", authenticateUser, getAllUserAdverts);
 router.post("/", authenticateUser, validateCreationOrEditing, createAdvert);
