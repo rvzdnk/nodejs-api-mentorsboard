@@ -52,7 +52,4 @@ userSchema.methods.validatePassword = async function (password) {
 
 const User = model("user", userSchema);
 
-const { Mentor, Student} = ROLE_LIST
-module.exports = { Mentor, Student};
-
 module.exports = User;

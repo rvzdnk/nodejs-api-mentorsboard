@@ -1,21 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const authenticateUser = require("../middlewares/authenticateUser");
-const { validateCreationOrEditing } = require("../middlewares/advertValidation");
+
+
+const mentorRouter = require("./mentor");
 
 const {
     getAdverts,
-    getAllUserAdverts,
-    createAdvert,
-    editAdvert,
-    deleteAdvert,
 } = require("../controllers/advertController");
 
+router.get("/", getAdverts);
 
-router.get("/", authenticateUser, getAllUserAdverts);
-router.get("/", authenticateUser, getAdverts);
-router.post("/", authenticateUser, validateCreationOrEditing, createAdvert);
-router.patch("/:advertId", authenticateUser, validateCreationOrEditing, editAdvert);
-router.delete("/:advertId", authenticateUser, deleteAdvert);
+router.use("/mentor", mentorRouter);
 
 module.exports = router;

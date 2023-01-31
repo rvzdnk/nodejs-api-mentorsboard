@@ -17,7 +17,7 @@ const getAdverts = async (req, res, next) => {
 
 const getAllUserAdverts = async (req, res, next) => {
     try {
-        const { id: userId } = req.user;
+        const { id: userId } = req.user; 
         const userAdverts = await getAdvertsByOwner(userId);
         res.status(200).json({userAdverts});
     } catch (error) {
