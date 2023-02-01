@@ -2,6 +2,13 @@ const User = require('../models/userSchema');
 
 const findUserByEmail = async (email) => await User.findOne({ email });
 
+
+const findUserNameById = async (id) => {
+  const userFinded = await User.findById(id);
+  const userName = userFinded.name;
+  return userName;
+};
+
 const createNewUser = async (body) => {
   const { name, email, password, role } = body;
   const newUser = new User({ name, email, role });
@@ -18,6 +25,7 @@ const updateAvatar = async (id, avatarURL) =>
 
 module.exports = {
   findUserByEmail,
+  findUserNameById,
   createNewUser,
   updateUserToken,
   updateAvatar,

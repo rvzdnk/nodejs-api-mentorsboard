@@ -6,8 +6,8 @@ const getAllAdverts = async () =>
 const getAdvertsByOwner = async (userId) =>
     await Advert.find({ owner: userId }, { owner: 0 });
 
-const createNewAdvert = async (userId, body) =>
-    await Advert.create ({...body, owner: userId });
+const createNewAdvert = async (userId, body, authorAdvert) =>
+    await Advert.create ({...body, owner: userId, author: authorAdvert });
 
 const editExistingAdvert = async (userId, advertId, body) =>
     await Advert.findOneAndUpdate(

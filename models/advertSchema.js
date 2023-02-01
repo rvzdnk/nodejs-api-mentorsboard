@@ -42,6 +42,9 @@ const advertSchema = new Schema (
             ref: "User",
             required: true,
         },
+        author: {
+            type: String,
+        }
     },
     { versionKey: false, strict: "throw" }
 );

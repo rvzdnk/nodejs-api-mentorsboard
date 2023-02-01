@@ -1,3 +1,4 @@
+
 const {
     getAllAdverts,
     getAdvertsByOwner,
@@ -5,6 +6,8 @@ const {
     editExistingAdvert,
     deleteExistingAdvert,
 } = require("../services/adverts");
+
+const { findUserNameById } = require("../services/users");
 
 const getAdverts = async (req, res, next) => {
     try {
@@ -28,13 +31,16 @@ const getAllUserAdverts = async (req, res, next) => {
 const createAdvert = async (req, res, next) => {
     try {
         const { id: userId } = req.user;
-        const newAdvert = await createNewAdvert(userId, req.body);
+        const authorName = await findUserNameById (userId);
+        const newAdvert = await createNewAdvert(userId, req.body, authorName);
+       
         res.status(201).json({
             newAdvert: {
                 technology: newAdvert.technology,
                 level: newAdvert.level,
                 price: newAdvert.price,
                 _id: newAdvert._id,
+                author: authorName,
             },
         });
     } catch (error){
