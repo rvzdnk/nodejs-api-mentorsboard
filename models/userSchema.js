@@ -47,7 +47,7 @@ userSchema.methods.setPassword = async function (password) {
   };
 
 userSchema.methods.validatePassword = async function (password) {
-    return await bcrypt.compare(password, this.password, function(error, isMatch) {
+    return await bCrypt.compare(password, this.password, function(error, isMatch) {
       if (error) {
         throw error
       } else if (!isMatch) {
