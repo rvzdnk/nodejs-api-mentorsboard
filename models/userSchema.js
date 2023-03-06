@@ -3,8 +3,8 @@ const { Schema, model } = mongoose;
 const bCrypt = require("bcrypt");
 
 const ROLE_LIST = [
-   "Student",
-   "Mentor"
+  "Student",
+  "Mentor"
 ];
 
 const userSchema = new Schema(
@@ -47,7 +47,7 @@ userSchema.methods.setPassword = async function (password) {
   };
 
 userSchema.methods.validatePassword = async function (password) {
-    return bCrypt.compare(password, this.password);
+    return await bCrypt.compare(password, this.password);
   };
 
 const User = model("user", userSchema);
