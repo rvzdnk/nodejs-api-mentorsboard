@@ -10,12 +10,10 @@ const registrationSchema = Joi.object({
     .email({
       minDomainSegments: 2,
     })
-    .pattern(
-      /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
-    )
+    .pattern(/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/)
     .required(),
     password: Joi.string()
-    .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/)
+    .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
     .required(),
     role: Joi.string().valid("Student", "Mentor"),
 });
@@ -31,7 +29,7 @@ const loginSchema = Joi.object({
     )
     .required(),
     password: Joi.string()
-    .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+    .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
     .required(),
 });
 
