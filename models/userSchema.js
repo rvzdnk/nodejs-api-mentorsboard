@@ -47,7 +47,7 @@ userSchema.methods.setPassword = async function (password) {
   };
 
 userSchema.methods.validatePassword = async function (password) {
-    return await bCrypt.compare(password, this.password)
+    return await bCrypt.compare(password, this.password);
 };
 
 const User = model("user", userSchema);
