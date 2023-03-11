@@ -57,8 +57,8 @@ const loginUser = async (req, res, next) => {
             userData: {
                 email,
                 id,
-                name,
-                role,
+                name: user.name,
+                role: user.role,
             },
         });
     } catch (error) {
