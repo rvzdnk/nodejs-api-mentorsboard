@@ -12,7 +12,12 @@ const { findUserNameById } = require("../services/users");
 const getAdverts = async (req, res, next) => {
     try {
         const allAdverts = await getAllAdverts();
-        res.status(200).json({allAdverts});
+        const currentPage = req.query.page || 1;
+        const advertsPerPage =  req.query.limit || 12;
+        const totalAdverts = allAdverts.length;
+        const totalPages = Math.ceil(totalAdverts/advertsPerPage);
+
+        res.status(200).json({allAdverts, currentPage, advertsPerPage, totalAdverts, totalPages});
     } catch (error) {
         next (error)
     }
