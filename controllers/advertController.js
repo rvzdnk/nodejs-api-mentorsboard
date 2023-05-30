@@ -16,8 +16,11 @@ const getAdverts = async (req, res, next) => {
         const advertsPerPage =  req.query.limit || 12;
         const totalAdverts = allAdverts.length;
         const totalPages = Math.ceil(totalAdverts/advertsPerPage);
+        const adverts = allAdverts
+                            .skip(currentPage * advertsPerPage)
+                            .limit(advertsPerPage);
 
-        res.status(200).json({allAdverts, currentPage, advertsPerPage, totalAdverts, totalPages});
+        res.status(200).json({adverts, currentPage, advertsPerPage, totalAdverts, totalPages});
     } catch (error) {
         next (error)
     }
