@@ -1,5 +1,6 @@
 
 const {
+    getAllAdverts,
     getAdvertsByOwner,
     createNewAdvert,
     editExistingAdvert,
@@ -12,13 +13,14 @@ const { findUserNameById } = require("../services/users");
 
 const getAdverts = async (req, res, next) => {
     try {
-        const currentPage = req.query.page || 0;
-        const advertsPerPage =  req.query.limit || 12;
+        const currentPage = parseInt(req.query.page)  -1 || 0;
+        const advertsPerPage =  parseInt(req.query.limit) || 12;
         const allAdverts = await Advert.find({})
                                         .lean()
                                         .skip(currentPage * advertsPerPage)
                                         .limit(advertsPerPage);
-        const totalAdverts = allAdverts.length;
+        const adverts = await getAllAdverts();
+        const totalAdverts = adverts.length;
         const totalPages = Math.ceil(totalAdverts/advertsPerPage);
 
         res.status(200).json({allAdverts, currentPage, advertsPerPage, totalAdverts, totalPages});
