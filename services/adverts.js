@@ -20,7 +20,7 @@ const deleteExistingAdvert = async (userId, advertId) =>
     await Advert.findOneAndDelete({ owner: userId, _id: advertId });
 
 module.exports = {
-    getAllAdverts,
+    // getAllAdverts,
     getAdvertsByOwner,
     createNewAdvert,
     editExistingAdvert,
