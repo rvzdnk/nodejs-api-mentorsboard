@@ -1,26 +1,27 @@
 
 const {
-    getAllAdverts,
     getAdvertsByOwner,
     createNewAdvert,
     editExistingAdvert,
     deleteExistingAdvert,
 } = require("../services/adverts");
+const Advert = require("../models/advertSchema");
+
 
 const { findUserNameById } = require("../services/users");
 
 const getAdverts = async (req, res, next) => {
     try {
-        const allAdverts = await getAllAdverts();
-        const currentPage = req.query.page || 1;
+        const currentPage = req.query.page || 0;
         const advertsPerPage =  req.query.limit || 12;
+        const allAdverts = await Advert.find({})
+                                        .lean()
+                                        .skip(currentPage * advertsPerPage)
+                                        .limit(advertsPerPage);
         const totalAdverts = allAdverts.length;
         const totalPages = Math.ceil(totalAdverts/advertsPerPage);
-        const adverts = allAdverts
-                            .skip(currentPage * advertsPerPage)
-                            .limit(advertsPerPage);
 
-        res.status(200).json({adverts, currentPage, advertsPerPage, totalAdverts, totalPages});
+        res.status(200).json({allAdverts, currentPage, advertsPerPage, totalAdverts, totalPages});
     } catch (error) {
         next (error)
     }

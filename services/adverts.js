@@ -1,7 +1,7 @@
 const Advert = require("../models/advertSchema");
 
-const getAllAdverts = async () =>
-    await Advert.find({}).lean();
+// const getAllAdverts = async () =>
+//     await Advert.find({}).lean();
 
 const getAdvertsByOwner = async (userId) =>
     await Advert.find({ owner: userId }, { owner: 0 });
