@@ -13,7 +13,7 @@ const { findUserNameById } = require("../services/users");
 
 const getAdverts = async (req, res, next) => {
     try {
-        const currentPage = parseInt(req.query.page) || 0;
+        const currentPage = parseInt(req.query.page) || 1;
         const advertsPerPage =  parseInt(req.query.limit) || 12;
         const allAdverts = await Advert.find({})
                                         .lean()
