@@ -13,7 +13,7 @@ const { findUserNameById } = require("../services/users");
 
 const getAdverts = async (req, res, next) => {
     try {
-        const currentPage = parseInt(req.query.page) || 1;
+        const currentPage = parseInt(req.query.page) -1 || 0;
         const advertsPerPage =  parseInt(req.query.limit) || 12;
         const allAdverts = await Advert.find({})
                                         .lean()
@@ -44,7 +44,7 @@ const createAdvert = async (req, res, next) => {
         const { id: userId } = req.user;
         const authorName = await findUserNameById (userId);
         const newAdvert = await createNewAdvert(userId, req.body, authorName);
-       
+
         res.status(201).json({
             newAdvert: {
                 technology: newAdvert.technology,
